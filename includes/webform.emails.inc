@@ -486,8 +486,11 @@ function webform_email_edit_form_validate($form, &$form_state) {
           if (empty($email_value) && !$empty_allowed) {
             form_set_error("{$field_name}_mapping][$cid][$key", t('An e-mail address must be provided for each option.'));
           }
-          elseif (!empty($email_value) && !valid_email_address($email_value)) {
-            form_set_error("{$field_name}_mapping][$cid][$key", t('The entered e-mail address "@email" does not appear valid', array('@email' => $value)));
+          $emails = array_filter(explode(',', $value));
+          foreach ($emails as $email) {
+            if (!valid_email_address(_webform_filter_values(trim($email), $form['#node']))) {
+              form_set_error("{$field_name}_mapping][$cid][$key", t('The entered e-mail address "@email" does not appear valid.', array('@email' => $email)));
+            }
           }
         }
       }
