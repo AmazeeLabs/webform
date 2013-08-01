@@ -266,6 +266,7 @@ function webform_email_edit_form($form, $form_state, $node, $email = array()) {
             '#title' => $label,
             '#default_value' => is_numeric($email[$field]) && $email[$field] == $cid && isset($email['extra'][$field . '_mapping'][$key]) ? $email['extra'][$field . '_mapping'][$key] : '',
             '#attributes' => array('placeholder' => t('email@example.com')),
+	    '#maxlength' => 500,
           );
         }
       }
