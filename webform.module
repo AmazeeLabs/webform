@@ -3980,6 +3980,7 @@ function webform_tt($name, $string, $langcode = NULL, $update = FALSE) {
     $options = array(
       'langcode' => $langcode,
       'update' => $update,
+      'sanitize' => FALSE,
     );
     return i18n_string($name, $string, $options);
   }
